@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Palavras-chave</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f5f5f5;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 40px;
+      }
+
+      th, td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      form {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        width: 300px;
+        margin-right: 10px;
+      }
+
+      input[type="submit"] {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      a.button {
+        padding: 6px 12px;
+        background-color: #2196F3;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 5px;
+      }
+
+      a.button.delete {
+        background-color: #f44336;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Palavras-chave</h1>
+
+    <%= form_with scope: :keyword, url: keywords_path, local: true do |f| %>
+      <%= f.label :word, "Nova Palavra:" %>
+      <%= f.text_field :name %>
+      <%= f.submit "Criar" %>
+    <% end %>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Palavra</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @keywords.each do |keyword| %>
+          <tr>
+            <td><%= keyword.id %></td>
+            <td><%= keyword.name %></td>
+            <td>
+              <%= link_to "Editar", edit_keyword_path(keyword), class: "button" %>
+              <%= link_to "Excluir", keyword_path(keyword), method: :delete, data: { confirm: "Tem certeza?" }, class: "button delete" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>

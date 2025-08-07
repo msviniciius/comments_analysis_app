@@ -1,0 +1,11 @@
+<h1>Editar Palavra-chave</h1>
+
+<%= form_with model: @keyword, local: true do |f| %>
+  <p>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </p>
+  <%= f.submit "Atualizar" %>
+<% end %>
+
+<%= link_to "Voltar", keywords_path %>
