@@ -1,6 +1,6 @@
 module Api
   module V1
-    class UsersController < ApplicationController
+    class UsersController < Api::BaseController
       def create
         username = params[:username]
         user = User.find_or_create_by!(username: username)
@@ -12,7 +12,7 @@ module Api
       def index
         @query = UserQuery.new
         @query.order = params[:order]
-        @presenter = V1::User::ListPresenter.new(@query.fetch)
+        @presenter = ::V1::User::ListPresenter.new(@query.fetch)
 
         render json: @presenter
       end
